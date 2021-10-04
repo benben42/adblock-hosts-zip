@@ -95,7 +95,7 @@ if __name__ == '__main__':
     download_hosts(tmp_dir + '/hosts')
     termux_dwn_fld = '/data/data/com.termux/files/home/storage/downloads'
     if os.path.isdir(termux_dwn_fld):
-        make_archive(termux_dwn_fld + '/hosts', 'zip', tmp_dir)
+        make_archive(termux_dwn_fld + '/update-hosts', 'zip', tmp_dir)
     else:
         make_archive('update-hosts', 'zip', tmp_dir)
     rmtree(tmp_dir)
