@@ -10,6 +10,8 @@ except:
 
 my_list = 'https://raw.githubusercontent.com/benben42/adblock-hosts-zip/master/adblock_lists.txt'
 
+local_list = 'adblock_lists.txt'
+
 ad_lists_fallback = [
 'https://pgl.yoyo.org/adservers/serverlist.php?hostformat=hosts&showintro=0&mimetype=plaintext', 
 'https://dbl.oisd.nl',
@@ -65,7 +67,10 @@ def get_add_lists():
         r = request('GET', my_list)
         addlists = r.text.split('\n')
     except:
-        addlists = ad_lists_fallback
+        if os.path.exists(local_list):
+            with open(local_list, 'r') as f:
+                addlists = f.read().split('\n') 
+        else: addlists = ad_lists_fallback
     return addlists
 
 def download_hosts(hostsfile):
