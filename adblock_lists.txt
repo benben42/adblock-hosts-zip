@@ -1,0 +1,7 @@
+https://pgl.yoyo.org/adservers/serverlist.php?hostformat=hosts&showintro=0&mimetype=plaintext
+https://dbl.oisd.nl
+https://raw.githubusercontent.com/tomasko126/easylistczechandslovak/master/filters.txt
+https://raw.githubusercontent.com/StevenBlack/hosts/master/hosts
+https://adaway.org/hosts.txt
+https://raw.githubusercontent.com/StevenBlack/hosts/master/hosts
+https://raw.githubusercontent.com/anoop142/miui-hosts/master/hosts
