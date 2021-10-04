@@ -1,4 +1,3 @@
-import requests
 import os
 from datetime import date
 from shutil import make_archive, rmtree
@@ -33,13 +32,13 @@ fi
 ui_print "Mounting system..."
 mount $SYSTEM_MOUNT
 ui_print "Extracting temp files..."
-cd /tmp; mkdir adfreezip; cd adfreezip;
+cd /tmp; mkdir adblockhosts; cd adblockhosts;
 unzip -o "$3"
 ui_print "Copy hosts file..."
 cp ./hosts $SYSTEM_MOUNT/etc/
 cp ./hosts $SYSTEM_MOUNT/system/etc/
 ui_print "Cleaning up..."
-rm /tmp/adfreezip -rf
+rm /tmp/adblockhosts -rf
 ui_print "Done, unmounting system..."
 umount $SYSTEM_MOUNT'''
 

@@ -1,0 +1,27 @@
+#!/sbin/sh
+export OUTFD="/proc/self/fd/$2"
+ui_print() {
+    echo "ui_print ${1}" > "$OUTFD"
+}
+ui_print "Zip updated: 2021-10-04 "
+ui_print ""
+ui_print "Updating hosts file..."
+ui_print "Detecting system mountpoint..."
+system_as_root=`getprop ro.build.system_root_image`
+if [ "$system_as_root" == "true" ]; then
+SYSTEM_MOUNT=/system_root
+else
+SYSTEM_MOUNT=/system
+fi
+ui_print "Mounting system..."
+mount $SYSTEM_MOUNT
+ui_print "Extracting temp files..."
+cd /tmp; mkdir adblockhosts; cd adblockhosts;
+unzip -o "$3"
+ui_print "Copy hosts file..."
+cp ./hosts $SYSTEM_MOUNT/etc/
+cp ./hosts $SYSTEM_MOUNT/system/etc/
+ui_print "Cleaning up..."
+rm /tmp/adblockhosts -rf
+ui_print "Done, unmounting system..."
+umount $SYSTEM_MOUNT
