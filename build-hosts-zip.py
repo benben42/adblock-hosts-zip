@@ -13,7 +13,6 @@ ad_lists = [
 'https://raw.githubusercontent.com/anoop142/miui-hosts/master/hosts'
 ]
 
-
 update_binary = f'''#!/sbin/sh
 export OUTFD="/proc/self/fd/$2"
 ui_print() {{
@@ -57,9 +56,12 @@ def download_hosts(hostsfile):
     if os.path.isfile(hostsfile):
         os.remove(hostsfile)
     for adlist in ad_lists:
-        response = request('GET', adlist)
-        with open(hostsfile, 'a+') as f:
-            f.write(response.text)
+        try:
+            response = request('GET', adlist)
+            with open(hostsfile, 'a+') as f:
+                f.write(response.text)
+        except:
+            print(f'Error downloading {adlist}')
     remove_empty_lines(hostsfile)
 
 if __name__ == '__main__':
@@ -77,6 +79,6 @@ if __name__ == '__main__':
     if os.path.isdir(termux_dwn_fld):
         make_archive(termux_dwn_fld + '/hosts', 'zip', tmp_dir)
     else:
-        make_archive('hosts', 'zip', tmp_dir)
+        make_archive('update-hosts', 'zip', tmp_dir)
     rmtree(tmp_dir)
     print('Done.')
