@@ -1,9 +1,16 @@
 import os
 from datetime import date
 from shutil import make_archive, rmtree
-from requests import request
 
-ad_lists = [
+try:
+    from requests import request
+except:
+    from subprocess import call
+    call('pip install requests', shell=True)
+
+my_list = 'https://raw.githubusercontent.com/benben42/adblock-hosts-zip/master/adblock_lists.txt'
+
+ad_lists_fallback = [
 'https://pgl.yoyo.org/adservers/serverlist.php?hostformat=hosts&showintro=0&mimetype=plaintext', 
 'https://dbl.oisd.nl',
 'https://raw.githubusercontent.com/tomasko126/easylistczechandslovak/master/filters.txt', 
@@ -52,7 +59,17 @@ def remove_empty_lines(filename):
         lines = [line for line in lines if line.strip() != '']
         filehandle.writelines(lines)  
 
+def get_add_lists():
+    addlists = []
+    try:
+        r = request('GET', my_list)
+        addlists = r.text.split('\n')
+    except:
+        addlists = ad_lists_fallback
+    return addlists
+
 def download_hosts(hostsfile):
+    ad_lists = get_add_lists()
     if os.path.isfile(hostsfile):
         os.remove(hostsfile)
     for adlist in ad_lists:
@@ -65,6 +82,7 @@ def download_hosts(hostsfile):
     remove_empty_lines(hostsfile)
 
 if __name__ == '__main__':
+    ad_lists = get_add_lists()
     base_dir = os.path.dirname(__file__)
     tmp_dir = base_dir + '/tmp'
     script_dir = tmp_dir + '/META-INF/com/google/android'
