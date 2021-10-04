@@ -15,6 +15,6 @@ In termux:
 ```
 termus-setup-storage
 pgk install python
-pip install request
+pip install requests
 python path/to/build-hosts.zip.py
 ```
