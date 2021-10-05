@@ -1,5 +1,4 @@
 import os
-from datetime import date
 from shutil import make_archive, rmtree
 import io
 import sys
@@ -34,7 +33,7 @@ export OUTFD="/proc/self/fd/$2"
 ui_print() {{
     echo "ui_print ${{1}}" > "$OUTFD"
 }}
-ui_print "Zip updated: {date.today()} "
+ui_print "Zip updated: {DTB} "
 ui_print ""
 ui_print "Updating hosts file..."
 ui_print "Detecting system mountpoint..."
