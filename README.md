@@ -2,6 +2,7 @@
 
 ## 1. Description
 Will create flashable TWRP .zip file containing adblock hosts file. Its termux compatible able to run directly on phone.
+Gathering hosts is based on [adBlock Hosts File Generator]('https://github.com/bornova/adblock-hosts') by [Bornova]('https://github.com/bornova')
 
 ## 2. Requirements
    ```
@@ -15,6 +16,6 @@ In termux:
 ```
 termus-setup-storage
 pgk install python
-pip install requests
-python path/to/build-hosts.zip.py
+download all the files & adjust them as needed
+python path/to/android-adblock-hosts.py
 ```
